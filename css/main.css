@@ -1,0 +1,52 @@
+body {
+    background-color: #99CCCC;
+}
+
+.content {
+    position: relative;
+    margin: 8% auto auto auto;
+    width: 40%;
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.content .fa {
+    font-size: 30px;
+    color: #339933;
+}
+
+.content .quote-content {
+    color: #339933;
+    font-size: 26px;
+    display: inline;
+}
+
+.content .author {
+    color: #339933;
+    text-align: right;
+}
+
+.content .author-content {
+    display: inline;
+    font-size: 18px;
+}
+
+.btn {
+    margin-top: 10px;
+    background: #339933;
+    border: #339933;
+}
+
+.btn:hover {
+    background: #006633;
+}
+
+.btn:focus {
+    outline: none;
+    background-color: #006633;
+}
+
+.btn-primary:active {
+    background-color: #006633 !important;
+}
