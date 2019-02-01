@@ -5,27 +5,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <title>一句话</title>
+    <title>计时器</title>
+    <style>
+        body {
+            background-color: #99CCCC;
+        }
+
+        .zhuti {
+            width: 400px;
+            margin: 0 auto;
+            font-size: 30px;
+        }
+
+        .zhuti span {
+            margin: 5px 5px;
+            padding: 2px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        .anniu {
+            width: 400px;
+            margin: 10px auto;
+            padding-left: 7px;
+        }
+
+        .anniu button {
+            width: 150px;
+            height: 30px;
+            background-color: #0099CC;
+            border: #0099CC;
+            box-shadow: grey 3px 3px 10px 1px;
+            color: rgb(240, 234, 234);
+            cursor: pointer;
+        }
+
+        .anniu button:hover {
+            background-color: #336699;
+        }
+
+        #dier {
+            float: right;
+            margin-right: 50px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container-fluid content">
-        <div class="quote">
-            <i class="fa fa-quote-left"></i>
-            <p class="quote-content"></p>
-        </div>
-        <div class="author">
-            <p class="author-content"></p>
-            <i class="fa fa-quote-right"></i>
-        </div>
-        <center><button class="btn btn-primary btn-next">随机一条</button></center>
+    <div class="zhuti">
+        <span>00</span>分<span>00</span>分<span>00</span>秒<span>000</span>毫秒
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <div class="anniu">
+        <button>开始</button><button id="dier">重置</button>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var spanshi = document.getElementsByTagName("span")[0];
+            var spanfen = document.getElementsByTagName("span")[1];
+            var spanmiao = document.getElementsByTagName("span")[2];
+            var spanhaomiao = document.getElementsByTagName("span")[3];
+            var begin = document.getElementsByTagName("button")[0];
+            var reset = document.getElementsByTagName("button")[1];
+            var time = h = m = s = ms = 0;
+            var flag = false;
+            function timer() {
+                ms = ms + 5;
+
+                if (ms > 999) {
+                    ms = 0;
+                    s++;
+                }
+                if (s > 59) {
+                    s = 0;
+                    m++;
+                }
+                if (m > 59) {
+                    m = 0;
+                    h++;
+                }
+                var d = to0ms(ms);
+                spanhaomiao.innerHTML = d;
+                var c = to0(s);
+                spanmiao.innerHTML = c;
+                var b = to0(m);
+                spanfen.innerHTML = b;
+                var a = to0(h);
+                spanshi.innerHTML = a;
+            }
+
+            begin.onclick = function(){
+                if(flag == false){
+                    time = setInterval(timer,5);
+                    begin.innerHTML = "暂停";
+                    flag = true;
+                }else{
+                    clearInterval(time);
+                    begin.innerHTML = "开始"
+                    flag = false;
+                }
+            }
+            reset.onclick = function(){
+                clearInterval(time);
+                flag = false;
+                h=m=s=ms=0;
+                begin.innerHTML = "开始";
+                spanshi.innerHTML = "00";
+                spanfen.innerHTML = "00";
+                spanmiao.innerHTML = "00";
+                spanhaomiao.innerHTML = "000";
+            }
+
+            function to0(n) {
+                if (n < 10) {
+                    return "0" + n;
+                }
+                else {
+                    return "" + n;
+                }
+            }
+            function to0ms(n) {
+                if (n < 10) {
+                    return "00" + n;
+                }
+                else if (n < 100 && n >= 10) {
+                    return "0" + n;
+                } else {
+                    return "" + n;
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
